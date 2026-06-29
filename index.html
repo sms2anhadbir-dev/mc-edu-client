@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC:EDU Hack Client — Download</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #00c853;
+    --green-dark: #009624;
+    --bg: #0a0f0a;
+    --card: #111811;
+    --border: #1e2e1e;
+    --text: #e8f5e8;
+    --muted: #6a8a6a;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,83,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,83,.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 60px 20px 40px; }
+
+  /* ── Hero ── */
+  .hero { text-align: center; margin-bottom: 48px; }
+
+  .icon-wrap {
+    width: 96px; height: 96px;
+    background: linear-gradient(135deg, #1a3a1a, #0d200d);
+    border: 2px solid var(--border);
+    border-radius: 22px;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+    box-shadow: 0 0 40px rgba(0,200,83,.15);
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(0,200,83,.1);
+    border: 1px solid rgba(0,200,83,.3);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 6vw, 42px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, #fff 40%, var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+
+  /* version pill */
+  .version-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .version-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* ── Buttons ── */
+  .btn-group { display: flex; flex-direction: column; gap: 10px; max-width: 380px; margin: 0 auto; }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: all .2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--green), #00a846);
+    color: #000;
+    box-shadow: 0 4px 24px rgba(0,200,83,.35);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 32px rgba(0,200,83,.5); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--green); color: var(--green); }
+
+  .btn svg { flex-shrink: 0; }
+
+  .btn-label { display: flex; flex-direction: column; align-items: flex-start; }
+  .btn-label .main { font-size: 14px; font-weight: 700; }
+  .btn-label .sub { font-size: 10px; font-weight: 400; opacity: .7; margin-top: 1px; }
+
+  .platform-tabs {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .ptab {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    transition: all .15s;
+  }
+  .ptab.active { background: rgba(0,200,83,.12); border-color: var(--green); color: var(--green); }
+
+  /* ── Feature cards ── */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 48px 0;
+  }
+  .feat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .feat-icon { font-size: 22px; margin-bottom: 10px; }
+  .feat h3 { font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+  .feat p { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Instructions ── */
+  .instructions {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 48px;
+  }
+  .instructions h2 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+  .step {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border)66;
+    font-size: 13px;
+    color: #c8e6c8;
+    line-height: 1.5;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(0,200,83,.12); border: 1px solid rgba(0,200,83,.3);
+    color: var(--green); font-size: 10px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── iOS trust alert ── */
+  .trust-box {
+    background: rgba(255,200,0,.05);
+    border: 1px solid rgba(255,200,0,.2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: #ffe082;
+    margin-top: 10px;
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+    padding: 20px;
+  }
+  .modal-overlay.show { opacity: 1; pointer-events: auto; }
+  .modal {
+    background: #141f14;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px 20px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    transform: scale(.94) translateY(10px);
+    transition: transform .3s cubic-bezier(.175,.885,.32,1.1);
+  }
+  .modal-overlay.show .modal { transform: scale(1) translateY(0); }
+  .modal-icon { font-size: 40px; margin-bottom: 12px; }
+  .modal h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .modal p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+  .modal .btn { width: 100%; margin-bottom: 8px; }
+  .modal-dismiss {
+    background: none; border: none;
+    color: var(--muted); font-family: 'Inter', sans-serif;
+    font-size: 12px; cursor: pointer;
+    padding: 4px; transition: color .15s;
+  }
+  .modal-dismiss:hover { color: var(--text); }
+
+  /* loading spinner inside button */
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(0,0,0,.2);
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+
+  /* ── Hack Import button (floating) ── */
+  .import-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 11px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,200,83,.2);
+    transition: all .2s;
+  }
+  .import-fab:hover {
+    background: rgba(0,200,83,.1);
+    box-shadow: 0 6px 28px rgba(0,200,83,.35);
+    transform: translateY(-1px);
+  }
+
+  /* ── Hack Import modal ── */
+  #importModal .modal {
+    max-width: 480px;
+    text-align: left;
+  }
+  #importModal .modal h3 { text-align: center; }
+
+  .drop-zone {
+    border: 2px dashed var(--border);
+    border-radius: 14px;
+    padding: 32px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s;
+    margin: 16px 0;
+    position: relative;
+  }
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--green);
+    background: rgba(0,200,83,.05);
+  }
+  .drop-zone input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .drop-zone-icon { font-size: 36px; margin-bottom: 10px; }
+  .drop-zone p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.6; }
+  .drop-zone p strong { color: var(--text); }
+
+  /* file list */
+  .import-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 14px;
+  }
+  .import-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0,200,83,.05);
+    border: 1px solid rgba(0,200,83,.15);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .import-item-name { flex: 1; font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .import-item-size { color: var(--muted); flex-shrink: 0; }
+  .import-item-remove {
+    background: none; border: none; color: var(--muted);
+    cursor: pointer; font-size: 16px; line-height: 1; padding: 0;
+    transition: color .15s;
+  }
+  .import-item-remove:hover { color: #ff5252; }
+
+  /* progress bar */
+  .import-progress { display: none; margin-bottom: 14px; }
+  .progress-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .progress-bar-wrap { background: var(--border); border-radius: 99px; height: 6px; overflow: hidden; }
+  .progress-bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--green), #00e676);
+    border-radius: 99px;
+    transition: width .3s ease;
+  }
+
+  /* success state */
+  .import-success { display: none; text-align: center; padding: 12px 0; }
+  .import-success-icon { font-size: 40px; margin-bottom: 8px; }
+  .import-success p { font-size: 13px; color: #a5d6a7; }
+  .import-success strong { color: var(--green); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="icon-wrap">🎮</div>
+    <div class="badge">v1.0 — Open Beta</div>
+    <h1>MC:EDU Hack Client</h1>
+    <p class="subtitle">
+      The first feature-packed client mod for Minecraft Education Edition.
+      /bomb, fly, noclip, ESP, speed — all in one install.
+    </p>
+    <div class="version-row">
+      <span>Supports</span>
+      <span class="version-pill">iOS 16+</span>
+      <span class="version-pill">Windows 10/11</span>
+      <span class="version-pill">Android 10+</span>
+    </div>
+
+    <!-- Platform tabs -->
+    <div class="platform-tabs">
+      <div class="ptab active" onclick="setPlatform('ios',this)">📱 iOS</div>
+      <div class="ptab" onclick="setPlatform('windows',this)">🖥 Windows</div>
+      <div class="ptab" onclick="setPlatform('android',this)">🤖 Android</div>
+    </div>
+
+    <!-- Buttons — change per platform -->
+    <div class="btn-group" id="btnGroup">
+      <!-- iOS default -->
+      <button class="btn btn-primary" onclick="directInstallIOS()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <div class="btn-label"><span class="main">Direct Install</span><span class="sub">No PC · No sideload · No jailbreak</span></div>
+        <div class="spinner" id="iosSpinner"></div>
+      </button>
+      <div class="trust-box">
+        ⚠️ After install: <strong>Settings → General → VPN & Device Management → Trust developer cert</strong>. Then open the app.
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feat"><div class="feat-icon">💣</div><h3>/bomb Command</h3><p>Fill any world with TNT and get flint & steel. Works at any permission level.</p></div>
+    <div class="feat"><div class="feat-icon">🚀</div><h3>Fly + Noclip</h3><p>Toggle fly with Q, noclip with V. Works in any game/world.</p></div>
+    <div class="feat"><div class="feat-icon">👁</div><h3>ESP Wallhack</h3><p>See all players through walls. Colour-coded highlights.</p></div>
+    <div class="feat"><div class="feat-icon">💨</div><h3>Speed Hack</h3><p>150 walk speed, 120 jump power. Auto re-applies on respawn.</p></div>
+    <div class="feat"><div class="feat-icon">📢</div><h3>Fake Chat Messages</h3><p>Send fake system/ban messages — screenshot and troll friends.</p></div>
+    <div class="feat"><div class="feat-icon">🧊</div><h3>Freeze Players</h3><p>Anchor all players in place from chat command.</p></div>
+  </div>
+
+  <!-- How to install -->
+  <div class="instructions" id="installGuide">
+    <h2>📱 How to Install — iOS</h2>
+    <div class="step"><div class="step-num">1</div><div>Tap <strong>Direct Install</strong> above. iOS will ask if you want to install — tap <strong>Install</strong>.</div></div>
+    <div class="step"><div class="step-num">2</div><div>Wait for the app to download. It will appear on your home screen.</div></div>
+    <div class="step"><div class="step-num">3</div><div>Go to <strong>Settings → General → VPN & Device Management</strong>. Find the developer certificate and tap <strong>Trust</strong>.</div></div>
+    <div class="step"><div class="step-num">4</div><div>Open Minecraft Education from your home screen. The hack client features are now active.</div></div>
+    <div class="step"><div class="step-num">5</div><div>Join or open any world. Type <code style="background:#0d0d0d;padding:1px 5px;border-radius:3px;color:var(--green)">/bomb</code> in chat to use the TNT troll.</div></div>
+  </div>
+
+</div>
+
+<!-- Hack Import FAB -->
+<button class="import-fab" onclick="openImport()">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+  Hack Import
+</button>
+
+<footer>
+  &copy; 2026 MC:EDU Hack Client. For educational and research use only.
+</footer>
+
+<!-- Hack Import modal -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <h3 style="margin:0;font-size:17px">⬆ Hack Import</h3>
+      <button class="modal-dismiss" onclick="closeImport()" style="font-size:20px;line-height:1">×</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:0">Select one or more <code style="background:#0d1a0d;padding:1px 5px;border-radius:3px;color:var(--green)">.mcaddon</code> or <code style="background:#0d1a0d;padding:1px 5px;border-radius:3px;color:var(--green)">.mcpack</code> files to inject into the client.</p>
+
+    <!-- Drop zone -->
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="hackFileInput" multiple accept=".mcaddon,.mcpack,.zip" onchange="handleFiles(this.files)">
+      <div class="drop-zone-icon">📦</div>
+      <p><strong>Drop .mcaddon files here</strong><br>or click to browse</p>
+    </div>
+
+    <!-- Selected file list -->
+    <div class="import-list" id="importList"></div>
+
+    <!-- Progress -->
+    <div class="import-progress" id="importProgress">
+      <div class="progress-label">
+        <span id="progressLabel">Uploading…</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
+    </div>
+
+    <!-- Success -->
+    <div class="import-success" id="importSuccess">
+      <div class="import-success-icon">✅</div>
+      <p>Hack injected successfully!<br><strong id="successName"></strong> is now active in the client.</p>
+    </div>
+
+    <!-- Actions -->
+    <button class="btn btn-primary" id="importSubmitBtn" onclick="submitImport()" disabled style="width:100%;opacity:.4;cursor:not-allowed">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <div class="btn-label"><span class="main">Inject Hack</span><span class="sub">Adds to client on next launch</span></div>
+    </button>
+    <button class="modal-dismiss" onclick="closeImport()" style="display:block;width:100%;margin-top:8px;text-align:center">Cancel</button>
+  </div>
+</div>
+
+<!-- Trust cert modal (shown after iOS install tap) -->
+<div class="modal-overlay" id="trustModal">
+  <div class="modal">
+    <div class="modal-icon">🔐</div>
+    <h3>One more step</h3>
+    <p>iOS will show an <strong>"Untrusted Developer"</strong> warning. To fix it:</p>
+    <ol style="text-align:left;font-size:12px;color:#aaa;line-height:2;padding-left:16px;margin-bottom:16px">
+      <li>Open <strong>Settings</strong></li>
+      <li>Go to <strong>General → VPN & Device Management</strong></li>
+      <li>Find the developer name and tap <strong>Trust</strong></li>
+      <li>Come back and open the app</li>
+    </ol>
+    <button class="btn btn-primary" onclick="closeModal()">Got it</button>
+    <br>
+    <button class="modal-dismiss" onclick="closeModal()">Dismiss</button>
+  </div>
+</div>
+
+<script>
+// ── Platform switcher ────────────────────────────────────────────────────────
+const platforms = {
+  ios: {
+    buttons: `
+      <button class="btn btn-primary" onclick="directInstallIOS()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <div class="btn-label"><span class="main">Direct Install</span><span class="sub">No PC · No sideload · No jailbreak</span></div>
+        <div class="spinner" id="iosSpinner"></div>
+      </button>
+      <div class="trust-box">⚠️ After install: <strong>Settings → General → VPN & Device Management → Trust developer cert</strong>.</div>
+    `,
+    guide: `
+      <h2>📱 How to Install — iOS</h2>
+      <div class="step"><div class="step-num">1</div><div>Tap <strong>Direct Install</strong> above. iOS asks to install — tap <strong>Install</strong>.</div></div>
+      <div class="step"><div class="step-num">2</div><div>Wait for the app to download and appear on your home screen.</div></div>
+      <div class="step"><div class="step-num">3</div><div>Go to <strong>Settings → General → VPN & Device Management</strong> → tap <strong>Trust</strong> on the developer cert.</div></div>
+      <div class="step"><div class="step-num">4</div><div>Open Minecraft Education. Hack features are already injected.</div></div>
+      <div class="step"><div class="step-num">5</div><div>Type <code style="background:#0d0d0d;padding:1px 5px;border-radius:3px;color:var(--green)">/bomb</code> in any world chat to arm the TNT troll.</div></div>
+    `
+  },
+  windows: {
+    buttons: `
+      <a class="btn btn-primary" href="mcedu-hack-client-setup.exe" download>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <div class="btn-label"><span class="main">Download for Windows</span><span class="sub">Windows 10 / 11 · 64-bit · ~18 MB</span></div>
+      </a>
+      <a class="btn btn-secondary" href="mcedu-hack-client.zip" download>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <div class="btn-label"><span class="main">Download .ZIP (portable)</span><span class="sub">No install needed — extract and run</span></div>
+      </a>
+    `,
+    guide: `
+      <h2>🖥 How to Install — Windows</h2>
+      <div class="step"><div class="step-num">1</div><div>Download the <strong>.exe</strong> installer or <strong>.zip</strong> portable version above.</div></div>
+      <div class="step"><div class="step-num">2</div><div>If Windows Defender blocks it, click <strong>More info → Run anyway</strong>. (It's flagged because it patches game files.)</div></div>
+      <div class="step"><div class="step-num">3</div><div>Run the installer. It automatically finds your MC:EDU installation and patches it.</div></div>
+      <div class="step"><div class="step-num">4</div><div>Launch Minecraft Education as normal. The hack menu loads on startup.</div></div>
+      <div class="step"><div class="step-num">5</div><div>Use <code style="background:#0d0d0d;padding:1px 5px;border-radius:3px;color:var(--green)">/bomb</code> in chat or press <strong>Insert</strong> to open the hack menu.</div></div>
+    `
+  },
+  android: {
+    buttons: `
+      <a class="btn btn-primary" href="mcedu-hack-client.apk" download>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <div class="btn-label"><span class="main">Download APK</span><span class="sub">Android 10+ · Allow unknown sources</span></div>
+      </a>
+      <div class="trust-box">⚠️ Enable <strong>Settings → Apps → Special App Access → Install Unknown Apps</strong> before installing the APK.</div>
+    `,
+    guide: `
+      <h2>🤖 How to Install — Android</h2>
+      <div class="step"><div class="step-num">1</div><div>Tap <strong>Download APK</strong> above.</div></div>
+      <div class="step"><div class="step-num">2</div><div>Go to <strong>Settings → Apps → Special App Access → Install Unknown Apps</strong> and allow your browser.</div></div>
+      <div class="step"><div class="step-num">3</div><div>Open the downloaded APK from your notifications or Downloads folder and tap <strong>Install</strong>.</div></div>
+      <div class="step"><div class="step-num">4</div><div>Open MC Education. The client injects automatically on launch.</div></div>
+      <div class="step"><div class="step-num">5</div><div>Type <code style="background:#0d0d0d;padding:1px 5px;border-radius:3px;color:var(--green)">/bomb</code> in any world to trigger the TNT troll.</div></div>
+    `
+  }
+};
+
+function setPlatform(p, el) {
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('btnGroup').innerHTML = platforms[p].buttons;
+  document.getElementById('installGuide').innerHTML = platforms[p].guide;
+}
+
+// ── iOS Direct Install ────────────────────────────────────────────────────────
+// itms-services:// triggers Apple's OTA enterprise install mechanism.
+// The manifest.plist must be hosted on HTTPS and point to the signed IPA.
+function directInstallIOS() {
+  // ⬇ Replace this URL with wherever you host your manifest.plist
+  const manifestURL = 'https://sms2anhadbir-dev.github.io/mc-edu-client/manifest.plist';
+
+  // This is the magic — same protocol Delta Executor uses
+  window.location.href = `itms-services://?action=download-manifest&url=${encodeURIComponent(manifestURL)}`;
+
+  // Show trust instructions modal after a short delay
+  setTimeout(() => openModal(), 1200);
+}
+
+function openModal()  { document.getElementById('trustModal').classList.add('show'); }
+function closeModal() { document.getElementById('trustModal').classList.remove('show'); }
+document.getElementById('trustModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('trustModal')) closeModal();
+});
+
+// ── Hack Import ───────────────────────────────────────────────────────────────
+let importedFiles = [];
+
+function openImport() {
+  importedFiles = [];
+  renderImportList();
+  resetImportState();
+  document.getElementById('importModal').classList.add('show');
+}
+function closeImport() {
+  document.getElementById('importModal').classList.remove('show');
+}
+document.getElementById('importModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('importModal')) closeImport();
+});
+
+// Drag-and-drop on the drop zone
+const dz = document.getElementById('dropZone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => {
+  e.preventDefault();
+  dz.classList.remove('drag-over');
+  handleFiles(e.dataTransfer.files);
+});
+
+function handleFiles(files) {
+  for (const f of files) {
+    if (!importedFiles.find(x => x.name === f.name)) importedFiles.push(f);
+  }
+  // reset file input so the same file can be re-added after removal
+  document.getElementById('hackFileInput').value = '';
+  renderImportList();
+  resetImportState();
+}
+
+function removeFile(name) {
+  importedFiles = importedFiles.filter(f => f.name !== name);
+  renderImportList();
+  resetImportState();
+}
+
+function renderImportList() {
+  const list = document.getElementById('importList');
+  const btn  = document.getElementById('importSubmitBtn');
+  if (!importedFiles.length) {
+    list.innerHTML = '';
+    btn.disabled = true;
+    btn.style.opacity = '.4';
+    btn.style.cursor = 'not-allowed';
+    return;
+  }
+  list.innerHTML = importedFiles.map(f => `
+    <div class="import-item">
+      <span style="font-size:18px">${f.name.endsWith('.mcaddon') ? '🧩' : '📦'}</span>
+      <span class="import-item-name" title="${f.name}">${f.name}</span>
+      <span class="import-item-size">${(f.size/1024).toFixed(1)} KB</span>
+      <button class="import-item-remove" onclick="removeFile('${f.name.replace(/'/g,"\\'")}')">×</button>
+    </div>
+  `).join('');
+  btn.disabled = false;
+  btn.style.opacity = '1';
+  btn.style.cursor = 'pointer';
+}
+
+function resetImportState() {
+  document.getElementById('importProgress').style.display = 'none';
+  document.getElementById('importSuccess').style.display = 'none';
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressPct').textContent = '0%';
+  const btn = document.getElementById('importSubmitBtn');
+  btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="btn-label"><span class="main">Inject Hack</span><span class="sub">Adds to client on next launch</span></div>`;
+}
+
+function submitImport() {
+  if (!importedFiles.length) return;
+  const btn = document.getElementById('importSubmitBtn');
+  btn.disabled = true;
+  btn.style.opacity = '.6';
+
+  const progress = document.getElementById('importProgress');
+  const fill = document.getElementById('progressFill');
+  const pct  = document.getElementById('progressPct');
+  const label = document.getElementById('progressLabel');
+  progress.style.display = 'block';
+
+  // Simulate upload progress
+  const names = importedFiles.map(f => f.name).join(', ');
+  let current = 0;
+  const phases = [
+    { to: 30, label: 'Reading pack…' },
+    { to: 60, label: 'Patching client…' },
+    { to: 85, label: 'Injecting modules…' },
+    { to: 100, label: 'Finalising…' },
+  ];
+  let phaseIdx = 0;
+
+  const tick = setInterval(() => {
+    current += Math.random() * 6 + 2;
+    if (current > 100) current = 100;
+    fill.style.width = current + '%';
+    pct.textContent = Math.floor(current) + '%';
+
+    if (phaseIdx < phases.length && current >= phases[phaseIdx].to) {
+      label.textContent = phases[phaseIdx].label;
+      phaseIdx++;
+    }
+
+    if (current >= 100) {
+      clearInterval(tick);
+      setTimeout(() => {
+        progress.style.display = 'none';
+        document.getElementById('successName').textContent = names;
+        document.getElementById('importSuccess').style.display = 'block';
+        btn.innerHTML = '✅ Injected';
+        btn.style.opacity = '.5';
+
+        // Save to localStorage so client "remembers" it
+        const existing = JSON.parse(localStorage.getItem('mc_injected') || '[]');
+        importedFiles.forEach(f => {
+          if (!existing.includes(f.name)) existing.push(f.name);
+        });
+        localStorage.setItem('mc_injected', JSON.stringify(existing));
+        importedFiles = [];
+        renderImportList();
+      }, 400);
+    }
+  }, 80);
+}
+</script>
+</body>
+</html>
