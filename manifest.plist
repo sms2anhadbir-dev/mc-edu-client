@@ -30,13 +30,13 @@
       <key>metadata</key>
       <dict>
         <key>bundle-identifier</key>
-        <string>com.mojang.minecraftedu</string>
+        <string>com.mojang.minecraft-edu</string>
         <key>bundle-version</key>
         <string>1.21.131.1</string>
         <key>kind</key>
         <string>software</string>
         <key>title</key>
-        <string>MC EDU Hack Client</string>
+        <string>A.SMC's Java Edition iOS Port</string>
       </dict>
     </dict>
   </array>
