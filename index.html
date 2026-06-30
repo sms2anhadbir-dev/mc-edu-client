@@ -402,8 +402,6 @@
     <div class="version-row">
       <span>Supports</span>
       <span class="version-pill">iOS 16+</span>
-      <span class="version-pill">Windows 10/11</span>
-      <span class="version-pill">Android 10+</span>
     </div>
 
     <!-- Platform tabs -->
@@ -543,39 +541,24 @@ const platforms = {
   },
   windows: {
     buttons: `
-      <a class="btn btn-primary" href="mcedu-hack-client-setup.exe" download>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        <div class="btn-label"><span class="main">Download for Windows</span><span class="sub">Windows 10 / 11 · 64-bit · ~18 MB</span></div>
-      </a>
-      <a class="btn btn-secondary" href="mcedu-hack-client.zip" download>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <div class="btn-label"><span class="main">Download .ZIP (portable)</span><span class="sub">No install needed — extract and run</span></div>
-      </a>
+      <div class="trust-box" style="border-color:rgba(0,200,83,.2);color:#a5d6a7;background:rgba(0,200,83,.05)">
+        🖥 Windows support is coming soon. Check back later.
+      </div>
     `,
     guide: `
-      <h2>🖥 How to Install — Windows</h2>
-      <div class="step"><div class="step-num">1</div><div>Download the <strong>.exe</strong> installer or <strong>.zip</strong> portable version above.</div></div>
-      <div class="step"><div class="step-num">2</div><div>If Windows Defender blocks it, click <strong>More info → Run anyway</strong>. (It's flagged because it patches game files.)</div></div>
-      <div class="step"><div class="step-num">3</div><div>Run the installer. It automatically finds your MC:EDU installation and patches it.</div></div>
-      <div class="step"><div class="step-num">4</div><div>Launch Minecraft Education as normal. The hack menu loads on startup.</div></div>
-      <div class="step"><div class="step-num">5</div><div>Use <code style="background:#0d0d0d;padding:1px 5px;border-radius:3px;color:var(--green)">/bomb</code> in chat or press <strong>Insert</strong> to open the hack menu.</div></div>
+      <h2>🖥 Windows — Coming Soon</h2>
+      <div class="step"><div class="step-num">1</div><div>Windows support is not yet available. Stay tuned for an update.</div></div>
     `
   },
   android: {
     buttons: `
-      <a class="btn btn-primary" href="mcedu-hack-client.apk" download>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <div class="btn-label"><span class="main">Download APK</span><span class="sub">Android 10+ · Allow unknown sources</span></div>
-      </a>
-      <div class="trust-box">⚠️ Enable <strong>Settings → Apps → Special App Access → Install Unknown Apps</strong> before installing the APK.</div>
+      <div class="trust-box" style="border-color:rgba(0,200,83,.2);color:#a5d6a7;background:rgba(0,200,83,.05)">
+        🤖 Android support is coming soon. Check back later.
+      </div>
     `,
     guide: `
-      <h2>🤖 How to Install — Android</h2>
-      <div class="step"><div class="step-num">1</div><div>Tap <strong>Download APK</strong> above.</div></div>
-      <div class="step"><div class="step-num">2</div><div>Go to <strong>Settings → Apps → Special App Access → Install Unknown Apps</strong> and allow your browser.</div></div>
-      <div class="step"><div class="step-num">3</div><div>Open the downloaded APK from your notifications or Downloads folder and tap <strong>Install</strong>.</div></div>
-      <div class="step"><div class="step-num">4</div><div>Open MC Education. The client injects automatically on launch.</div></div>
-      <div class="step"><div class="step-num">5</div><div>Type <code style="background:#0d0d0d;padding:1px 5px;border-radius:3px;color:var(--green)">/bomb</code> in any world to trigger the TNT troll.</div></div>
+      <h2>🤖 Android — Coming Soon</h2>
+      <div class="step"><div class="step-num">1</div><div>Android support is not yet available. Stay tuned for an update.</div></div>
     `
   }
 };
