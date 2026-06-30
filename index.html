@@ -415,7 +415,7 @@
       <!-- iOS default -->
       <button class="btn btn-primary" onclick="directInstallIOS()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <div class="btn-label"><span class="main">Direct Install</span><span class="sub">No PC · No sideload · No jailbreak</span></div>
+        <div class="btn-label"><span class="main">Install</span><span class="sub">No PC required · iOS 16+</span></div>
         <div class="spinner" id="iosSpinner"></div>
       </button>
       <div class="trust-box">
@@ -426,44 +426,43 @@
 
   <!-- Features -->
   <div class="features">
-    <div class="feat"><div class="feat-icon">💣</div><h3>/bomb Command</h3><p>Fill any world with TNT and get flint & steel. Works at any permission level.</p></div>
-    <div class="feat"><div class="feat-icon">🚀</div><h3>Fly + Noclip</h3><p>Toggle fly with Q, noclip with V. Works in any game/world.</p></div>
-    <div class="feat"><div class="feat-icon">👁</div><h3>ESP Wallhack</h3><p>See all players through walls. Colour-coded highlights.</p></div>
-    <div class="feat"><div class="feat-icon">💨</div><h3>Speed Hack</h3><p>150 walk speed, 120 jump power. Auto re-applies on respawn.</p></div>
-    <div class="feat"><div class="feat-icon">📢</div><h3>Fake Chat Messages</h3><p>Send fake system/ban messages — screenshot and troll friends.</p></div>
-    <div class="feat"><div class="feat-icon">🧊</div><h3>Freeze Players</h3><p>Anchor all players in place from chat command.</p></div>
+    <div class="feat"><div class="feat-icon">☕</div><h3>Java Mechanics</h3><p>Authentic Java Edition physics, combat, and movement — faithfully ported to iOS.</p></div>
+    <div class="feat"><div class="feat-icon">🌍</div><h3>Full World Support</h3><p>Join any world or server with full Java-compatible gameplay.</p></div>
+    <div class="feat"><div class="feat-icon">🎮</div><h3>Touch Controls</h3><p>Optimised touch layout designed for iPhone and iPad screens.</p></div>
+    <div class="feat"><div class="feat-icon">🔧</div><h3>Addon Support</h3><p>Import and use your existing .mcaddon and .mcpack files.</p></div>
+    <div class="feat"><div class="feat-icon">⚡</div><h3>Fast Performance</h3><p>Optimised renderer for smooth 60fps gameplay on modern iOS devices.</p></div>
+    <div class="feat"><div class="feat-icon">🔄</div><h3>Regular Updates</h3><p>Kept up to date with the latest Java Edition releases.</p></div>
   </div>
 
   <!-- How to install -->
   <div class="instructions" id="installGuide">
     <h2>📱 How to Install — iOS</h2>
-    <div class="step"><div class="step-num">1</div><div>Tap <strong>Direct Install</strong> above. iOS will ask if you want to install — tap <strong>Install</strong>.</div></div>
-    <div class="step"><div class="step-num">2</div><div>Wait for the app to download. It will appear on your home screen.</div></div>
+    <div class="step"><div class="step-num">1</div><div>Tap <strong>Install</strong> above. iOS will prompt you to install the app — tap <strong>Install</strong>.</div></div>
+    <div class="step"><div class="step-num">2</div><div>Wait for the download to complete. The app will appear on your home screen.</div></div>
     <div class="step"><div class="step-num">3</div><div>Go to <strong>Settings → General → VPN & Device Management</strong>. Find the developer certificate and tap <strong>Trust</strong>.</div></div>
-    <div class="step"><div class="step-num">4</div><div>Open Minecraft Education from your home screen. The hack client features are now active.</div></div>
-    <div class="step"><div class="step-num">5</div><div>Join or open any world. Type <code style="background:#0d0d0d;padding:1px 5px;border-radius:3px;color:var(--green)">/bomb</code> in chat to use the TNT troll.</div></div>
+    <div class="step"><div class="step-num">4</div><div>Open the app from your home screen and start playing.</div></div>
   </div>
 
 </div>
 
-<!-- Hack Import FAB -->
+<!-- Addon Import FAB -->
 <button class="import-fab" onclick="openImport()">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-  Hack Import
+  Import Addon
 </button>
 
 <footer>
-  &copy; 2026 MC:EDU Hack Client. For educational and research use only.
+  &copy; 2026 A.SMC's Java Edition iOS Port. Community project — not affiliated with Mojang or Microsoft.
 </footer>
 
 <!-- Hack Import modal -->
 <div class="modal-overlay" id="importModal">
   <div class="modal">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-      <h3 style="margin:0;font-size:17px">⬆ Hack Import</h3>
+      <h3 style="margin:0;font-size:17px">⬆ Import Addon</h3>
       <button class="modal-dismiss" onclick="closeImport()" style="font-size:20px;line-height:1">×</button>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:0">Select one or more <code style="background:#0d1a0d;padding:1px 5px;border-radius:3px;color:var(--green)">.mcaddon</code> or <code style="background:#0d1a0d;padding:1px 5px;border-radius:3px;color:var(--green)">.mcpack</code> files to inject into the client.</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:0">Select one or more <code style="background:#0d1a0d;padding:1px 5px;border-radius:3px;color:var(--green)">.mcaddon</code> or <code style="background:#0d1a0d;padding:1px 5px;border-radius:3px;color:var(--green)">.mcpack</code> files to load into the game.</p>
 
     <!-- Drop zone -->
     <div class="drop-zone" id="dropZone">
@@ -487,13 +486,13 @@
     <!-- Success -->
     <div class="import-success" id="importSuccess">
       <div class="import-success-icon">✅</div>
-      <p>Hack injected successfully!<br><strong id="successName"></strong> is now active in the client.</p>
+      <p>Addon loaded successfully!<br><strong id="successName"></strong> will be active on next launch.</p>
     </div>
 
     <!-- Actions -->
     <button class="btn btn-primary" id="importSubmitBtn" onclick="submitImport()" disabled style="width:100%;opacity:.4;cursor:not-allowed">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      <div class="btn-label"><span class="main">Inject Hack</span><span class="sub">Adds to client on next launch</span></div>
+      <div class="btn-label"><span class="main">Load Addon</span><span class="sub">Active on next game launch</span></div>
     </button>
     <button class="modal-dismiss" onclick="closeImport()" style="display:block;width:100%;margin-top:8px;text-align:center">Cancel</button>
   </div>
@@ -504,7 +503,7 @@
   <div class="modal">
     <div class="modal-icon">🔐</div>
     <h3>One more step</h3>
-    <p>iOS will show an <strong>"Untrusted Developer"</strong> warning. To fix it:</p>
+    <p>iOS requires you to trust the developer certificate before opening the app:</p>
     <ol style="text-align:left;font-size:12px;color:#aaa;line-height:2;padding-left:16px;margin-bottom:16px">
       <li>Open <strong>Settings</strong></li>
       <li>Go to <strong>General → VPN & Device Management</strong></li>
@@ -524,7 +523,7 @@ const platforms = {
     buttons: `
       <button class="btn btn-primary" onclick="directInstallIOS()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <div class="btn-label"><span class="main">Direct Install</span><span class="sub">No PC · No sideload · No jailbreak</span></div>
+        <div class="btn-label"><span class="main">Install</span><span class="sub">No PC required · iOS 16+</span></div>
         <div class="spinner" id="iosSpinner"></div>
       </button>
       <div class="trust-box">⚠️ After install: <strong>Settings → General → VPN & Device Management → Trust developer cert</strong>.</div>
@@ -660,7 +659,7 @@ function resetImportState() {
   document.getElementById('progressFill').style.width = '0%';
   document.getElementById('progressPct').textContent = '0%';
   const btn = document.getElementById('importSubmitBtn');
-  btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="btn-label"><span class="main">Inject Hack</span><span class="sub">Adds to client on next launch</span></div>`;
+  btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="btn-label"><span class="main">Load Addon</span><span class="sub">Active on next game launch</span></div>`;
 }
 
 function submitImport() {
@@ -703,7 +702,7 @@ function submitImport() {
         progress.style.display = 'none';
         document.getElementById('successName').textContent = names;
         document.getElementById('importSuccess').style.display = 'block';
-        btn.innerHTML = '✅ Injected';
+        btn.innerHTML = '✅ Loaded';
         btn.style.opacity = '.5';
 
         // Save to localStorage so client "remembers" it
